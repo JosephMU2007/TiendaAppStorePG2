@@ -1,5 +1,6 @@
 package arreglos.tienda.interfaz;
 
+import arreglos.tienda.modelo.*;
 import arreglos.tienda.modelo.AppStore;
 import arreglos.tienda.modelo.Juego;
 
@@ -11,15 +12,16 @@ public class MainTienda {
 
     static void main() {
         int opc;
+        tienda.cargarDatos();
         do{
             menu();
             opc = Integer.parseInt(sc.nextLine());
             switch (opc){
                 case 1:{
-
+                    ingresarJuegos();
                 }break;
                 case 2:{
-
+                    System.out.println(tienda.sacarJuegos());
                 }break;
                 case 3:{
 
@@ -53,4 +55,26 @@ public class MainTienda {
         System.out.print("Ingrese una opcion: ");
     }
 
+    public static void ingresarJuegos(){
+        System.out.println("*******Ingreso de datos********");
+        String nombre = Validacion.leerString("Ingrese el nombre");
+        String categoria = Validacion.leerString("Ingrese la categoria");
+        System.out.print("Ingrese el tamanio: ");
+        int tamanio = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese el precio: ");
+        double precio = Double.parseDouble(sc.nextLine());
+        System.out.print("Ingrese el stock inicial: ");
+        int licenciasDisponibles = Integer.parseInt(sc.nextLine());
+    }
+
+    public static void mostrarJuego(){
+        Juego juegos[]=tienda.getJuegos();
+        if (tienda.getIndice()!=-1) {
+            for (int i = 0; i <= tienda.getIndice(); i++) {
+                System.out.println(juegos[i]);
+            }
+        }else{
+            System.out.println("No hay Juegos para mostrar");
+        }
+    }
 }

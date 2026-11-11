@@ -10,7 +10,7 @@ public class AppStore {
         indice = -1;
         cargarDatos();
     }
-    private void cargarDatos(){
+    public void cargarDatos(){
         agregarJuego(new Juego("Fifa2026","Deportes",15,45,50));
         agregarJuego(new Juego("Roblox","Acción",23,59,80));
     }
@@ -19,11 +19,18 @@ public class AppStore {
         return juegos;
     }
 
-    public void agregarJuego(Juego j){ //en vez del set()
+    public int getIndice() {
+        return indice;
+    }
+
+    public boolean agregarJuego(Juego j){ //en vez del set()
         if(j != null && indice < MAX -1){
             juegos[++indice] = j;
+            return true;
         }
+        return false;
     }
+
     public Juego buscarJuego(String nombre){
         if(nombre != null && !nombre.trim().isEmpty()){
             for(int i = 0; i < indice; i++){
@@ -58,7 +65,7 @@ public class AppStore {
     }
     public String sacarJuegos(){
         String juegoS = "";
-        for(int i = 0; i < indice; i++){
+        for(int i = 0; i <= indice; i++){
             juegoS += juegos[i];
             juegoS += "\n";
         }
