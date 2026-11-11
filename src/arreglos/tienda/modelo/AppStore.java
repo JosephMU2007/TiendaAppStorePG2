@@ -8,7 +8,7 @@ public class AppStore {
     public AppStore(){
         juegos = new Juego[MAX];
         indice = -1;
-        cargarDatos();
+        //cargarDatos();
     }
     public void cargarDatos(){
         agregarJuego(new Juego("Fifa2026","Deportes",15,45,50));
@@ -33,7 +33,7 @@ public class AppStore {
 
     public Juego buscarJuego(String nombre){
         if(nombre != null && !nombre.trim().isEmpty()){
-            for(int i = 0; i < indice; i++){
+            for(int i = 0; i <= indice; i++){
                 if(juegos[i].getNombre().equalsIgnoreCase(nombre)){
                     return juegos[i];
                 }

@@ -4,6 +4,7 @@ import arreglos.tienda.modelo.*;
 import arreglos.tienda.modelo.AppStore;
 import arreglos.tienda.modelo.Juego;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class MainTienda {
@@ -13,37 +14,45 @@ public class MainTienda {
     static void main() {
         int opc;
         tienda.cargarDatos();
-        do{
+        do {
             menu();
             opc = Integer.parseInt(sc.nextLine());
-            switch (opc){
-                case 1:{
+            switch (opc) {
+                case 1: {
                     ingresarJuegos();
-                }break;
-                case 2:{
+                }
+                break;
+                case 2: {
                     System.out.println(tienda.sacarJuegos());
-                }break;
-                case 3:{
+                }
+                break;
+                case 3: {
 
-                }break;
-                case 4:{
+                }
+                break;
+                case 4: {
 
-                }break;
-                case 5:{
+                }
+                break;
+                case 5: {
 
-                }break;
-                case 6:{
+                }
+                break;
+                case 6: {
 
-                }break;
-                case 7:{
+                }
+                break;
+                case 7: {
                     System.out.println("Gracias por usar nuestros servicios");
-                }break;
+                }
+                break;
                 default:
                     System.out.println("No es una opción válida");
             }
-        }while(opc != 7);
+        } while (opc != 7);
     }
-    public static void menu(){
+
+    public static void menu() {
         System.out.println("**********AppStore Udla**********");
         System.out.println("1. Ingresar Juego");
         System.out.println("2. Mostrar juegos");
@@ -55,7 +64,7 @@ public class MainTienda {
         System.out.print("Ingrese una opcion: ");
     }
 
-    public static void ingresarJuegos(){
+    public static void ingresarJuegos() {
         System.out.println("*******Ingreso de datos********");
         String nombre = Validacion.leerString("Ingrese el nombre");
         String categoria = Validacion.leerString("Ingrese la categoria");
@@ -65,9 +74,14 @@ public class MainTienda {
         double precio = Double.parseDouble(sc.nextLine());
         System.out.print("Ingrese el stock inicial: ");
         int licenciasDisponibles = Integer.parseInt(sc.nextLine());
+        if (tienda.agregarJuego(new Juego(nombre, categoria, tamanio, precio, licenciasDisponibles))) {
+            JOptionPane.showMessageDialog(null, "El juego se ha agregado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "El juego no pudo ser agregado ");
+        }
     }
 
-    public static void mostrarJuego(){
+   /* public static void mostrarJuego(){
         Juego juegos[]=tienda.getJuegos();
         if (tienda.getIndice()!=-1) {
             for (int i = 0; i <= tienda.getIndice(); i++) {
@@ -78,3 +92,21 @@ public class MainTienda {
         }
     }
 }
+*/
+
+
+    public static void vender() {
+        String nombre = Validacion.leerString("Ingrese el nombre del juego");
+        System.out.println("Ingrese la cantidad: ");
+        int cantidad = Integer.parseInt(sc.nextLine());
+
+        double pago = tienda.vender(nombre, cantidad);
+        if (pago >= 0) {
+            JOptionPane.showMessageDialog(null, "Juego: " + nombre + "\nCantidad: " + cantidad +
+                    "\nValor a cancelar: " + pago);
+        } else {
+            JOptionPane.showMessageDialog(null, "no ha sido posible vender el juego" + nombre);
+        }
+    }
+}
+
